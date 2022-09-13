@@ -4,6 +4,9 @@ import Header from './layout/Header';
 import Todos from './Todos.js';
 
 class App extends React.Component {
+  handleCheckboxChange = () => {
+    alert('test');
+  };
   state = {
     todos: [
       {
@@ -27,7 +30,10 @@ class App extends React.Component {
     return (
       <div className="container">
         <Header />
-        <Todos todos={this.state.todos} />
+        <Todos
+          todos={this.state.todos}
+          handleChange={this.handleCheckboxChange}
+        />
       </div>
     );
   }
