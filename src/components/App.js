@@ -3,17 +3,18 @@ import '../style.css';
 import Header from './layout/Header';
 import Todos from './Todos.js';
 import AddTodo from './AddTodo';
+import * as uuid from 'uuid';
 
 class App extends React.Component {
   addTodo = (title) => {
     const newTodo = {
-      id = this.state.todos.length + 1,
-      title: title, 
-      completed: false
-    }
+      id: uuid.v4(),
+      title: title,
+      completed: false,
+    };
     this.setState({
-      todos: [...this.state.todos, newTodo]
-      });
+      todos: [...this.state.todos, newTodo],
+    });
   };
   deleteTodo = (id) => {
     this.setState({
