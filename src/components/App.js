@@ -4,8 +4,18 @@ import Header from './layout/Header';
 import Todos from './Todos.js';
 
 class App extends React.Component {
-  handleCheckboxChange = () => {
-    alert('test');
+  deleteTodo = (id) =>{
+    alert(id)
+  }
+  handleCheckboxChange = (id) => {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        if (todo.id === id){
+          todo.completed = !todo.completed
+        }
+        return todo
+      })
+    })
   };
   state = {
     todos: [
@@ -33,6 +43,7 @@ class App extends React.Component {
         <Todos
           todos={this.state.todos}
           handleChange={this.handleCheckboxChange}
+          deleteTodo={this.deleteTodo}
         />
       </div>
     );
