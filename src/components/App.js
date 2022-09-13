@@ -5,6 +5,16 @@ import Todos from './Todos.js';
 import AddTodo from './AddTodo';
 
 class App extends React.Component {
+  addTodo = (title) => {
+    const newTodo = {
+      id = this.state.todos.length + 1,
+      title: title, 
+      completed: false
+    }
+    this.setState({
+      todos: [...this.state.todos, newTodo]
+      });
+  };
   deleteTodo = (id) => {
     this.setState({
       todos: [
@@ -47,7 +57,7 @@ class App extends React.Component {
     return (
       <div className="container">
         <Header />
-        <AddTodo />
+        <AddTodo addTodo={this.addTodo} />
         <Todos
           todos={this.state.todos}
           handleChange={this.handleCheckboxChange}

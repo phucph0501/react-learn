@@ -1,17 +1,24 @@
 import React from 'react';
 
 class AddTodo extends React.Component {
-  onInputChange = e =>{
+  onInputChange = (e) => {
     this.setState({
-      title: e.target.value
-    })
-  }
+      title: e.target.value,
+    });
+  };
+  addTodo = (e) => {
+    e.preventDefault();
+    this.props.addTodo(this.state.title);
+    this.setState({
+      title: '',
+    });
+  };
   state = {
     title: '',
   };
   render() {
     return (
-      <form className="form-container">
+      <form className="form-container" onSubmit={this.addTodo}>
         <input
           type="text"
           placeholder="Add Todo..."
@@ -19,11 +26,7 @@ class AddTodo extends React.Component {
           value={this.state.title}
           onChange={this.onInputChange}
         ></input>
-        <input
-          type="submit"
-          value="Submit"
-          className="input-submit"
-        ></input>
+        <input type="submit" value="Submit" className="input-submit"></input>
       </form>
     );
   }
