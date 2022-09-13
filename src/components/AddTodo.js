@@ -1,0 +1,31 @@
+import React from 'react';
+
+class AddTodo extends React.Component {
+  onInputChange = e =>{
+    this.setState({
+      title: e.target.value
+    })
+  }
+  state = {
+    title: '',
+  };
+  render() {
+    return (
+      <form className="form-container">
+        <input
+          type="text"
+          placeholder="Add Todo..."
+          className="input-text"
+          value={this.state.title}
+          onChange={this.onInputChange}
+        ></input>
+        <input
+          type="submit"
+          value="Submit"
+          className="input-submit"
+        ></input>
+      </form>
+    );
+  }
+}
+export default AddTodo;

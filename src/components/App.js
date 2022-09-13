@@ -2,20 +2,27 @@ import React from 'react';
 import '../style.css';
 import Header from './layout/Header';
 import Todos from './Todos.js';
+import AddTodo from './AddTodo';
 
 class App extends React.Component {
-  deleteTodo = (id) =>{
-    alert(id)
-  }
+  deleteTodo = (id) => {
+    this.setState({
+      todos: [
+        ...this.state.todos.filter((todo) => {
+          return todo.id !== id;
+        }),
+      ],
+    });
+  };
   handleCheckboxChange = (id) => {
     this.setState({
-      todos: this.state.todos.map(todo => {
-        if (todo.id === id){
-          todo.completed = !todo.completed
+      todos: this.state.todos.map((todo) => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
         }
-        return todo
-      })
-    })
+        return todo;
+      }),
+    });
   };
   state = {
     todos: [
@@ -40,6 +47,7 @@ class App extends React.Component {
     return (
       <div className="container">
         <Header />
+        <AddTodo />
         <Todos
           todos={this.state.todos}
           handleChange={this.handleCheckboxChange}
