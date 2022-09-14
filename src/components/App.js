@@ -5,6 +5,7 @@ import Todos from './Todos.js';
 import AddTodo from './AddTodo';
 import * as uuid from 'uuid';
 import axios from 'axios';
+import Footer from './store/containers/Footer';
 
 function App() {
   const [state, setState] = useState({ todos: [] });
@@ -62,6 +63,7 @@ function App() {
         handleChange={handleCheckboxChange}
         deleteTodo={deleteTodo}
       />
+      <Footer />
     </div>
   );
 }
