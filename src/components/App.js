@@ -4,18 +4,35 @@ import Header from './layout/Header';
 import Todos from './Todos.js';
 import AddTodo from './AddTodo';
 import * as uuid from 'uuid';
+import axios from 'axios';
 
 class App extends React.Component {
+  state = {
+    todos: [],
+  };
+  componentDidMount() {
+    const config = {
+      params: {
+        _limit: 5,
+      },
+    };
+    //tạo GET request để lấy danh sách todos
+    axios
+      .get('https://jsonplaceholder.typicode.com/todos', config)
+      .then((response) => this.setState({ todos: response.data }));
+  }
   addTodo = (title) => {
     const newTodo = {
-      id: uuid.v4(),
       title: title,
       completed: false,
     };
-    this.setState({
-      todos: [...this.state.todos, newTodo],
-    });
+    axios
+      .post('https://jsonplaceholder.typicode.com/todos', newTodo)
+      .then((response) => {
+        this.setState({ todos: [...this.state.todos, response, data] });
+      });
   };
+
   deleteTodo = (id) => {
     this.setState({
       todos: [
@@ -34,25 +51,6 @@ class App extends React.Component {
         return todo;
       }),
     });
-  };
-  state = {
-    todos: [
-      {
-        id: 1,
-        title: 'Setup development environment',
-        completed: true,
-      },
-      {
-        id: 2,
-        title: 'Develop website and add content',
-        completed: false,
-      },
-      {
-        id: 3,
-        title: 'Deploy to live server',
-        completed: false,
-      },
-    ],
   };
   render() {
     return (
