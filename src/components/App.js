@@ -29,7 +29,7 @@ class App extends React.Component {
     axios
       .post('https://jsonplaceholder.typicode.com/todos', newTodo)
       .then((response) => {
-        this.setState({ todos: [...this.state.todos, response, data] });
+        this.setState({ todos: [...this.state.todos, response.data] });
       });
   };
 
